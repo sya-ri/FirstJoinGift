@@ -19,6 +19,9 @@ object GiftItem {
             }
         }
 
+    val isNullEditPlayer
+        get() = editPlayer == null
+
     fun openEdit(player: Player) {
         val inventory = plugin.server.createInventory(null, 36, "".toColor).apply {
             contents = giftItemList.toTypedArray()

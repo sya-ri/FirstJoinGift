@@ -1,7 +1,7 @@
 package me.syari.fjg.command
 
 import me.syari.fjg.item.GiftItem
-import me.syari.fjg.util.ColoredText.toColor
+import me.syari.fjg.util.ColoredText.sendWithPrefix
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -15,17 +15,31 @@ object FirstJoinGiftCommand: CommandExecutor, TabCompleter {
         when (args.getOrNull(0)?.toLowerCase()) {
             "get" -> {
                 if (sender !is Player) {
-                    sender.sendMessage("コンソールから実行できないコマンドです".toColor)
+                    sender.sendWithPrefix("&cコンソールから実行できないコマンドです")
                     return true
                 }
                 GiftItem.give(sender)
+                sender.sendWithPrefix("&fアイテムを取得しました")
             }
             "edit" -> {
                 if (sender !is Player) {
-                    sender.sendMessage("コンソールから実行できないコマンドです".toColor)
+                    sender.sendWithPrefix("&cコンソールから実行できないコマンドです")
                     return true
                 }
-                GiftItem.openEdit(sender)
+                if (GiftItem.isNullEditPlayer) {
+                    GiftItem.openEdit(sender)
+                } else {
+                    sender.sendWithPrefix("&c編集中のプレイヤーがいます")
+                }
+            }
+            else -> {
+                sender.sendWithPrefix(
+                    """
+                    &fコマンド一覧
+                    &7- &6/fjg get &7テストでアイテムを取得します
+                    &7- &6/fjg edit &7渡すアイテムを設定します
+                """.trimIndent()
+                )
             }
         }
         return true
