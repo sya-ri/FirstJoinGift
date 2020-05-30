@@ -9,9 +9,9 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 
 object GiftItemEditEvent: Listener {
     @EventHandler
-    fun on(e: InventoryCloseEvent){
+    fun on(e: InventoryCloseEvent) {
         val player = e.player as? Player ?: return
-        if(player.isEditGiftItem){
+        if (player.isEditGiftItem) {
             val inventory = e.inventory
             giftItemList = inventory.contents.filterNotNull()
             player.isEditGiftItem = false

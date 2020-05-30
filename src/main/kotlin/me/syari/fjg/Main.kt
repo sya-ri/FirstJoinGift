@@ -19,7 +19,7 @@ class Main: JavaPlugin() {
         registerEvents(GiftItemEditEvent)
     }
 
-    private fun registerEvents(vararg listener: Listener){
+    private fun registerEvents(vararg listener: Listener) {
         listener.forEach {
             server.pluginManager.registerEvents(it, this)
         }

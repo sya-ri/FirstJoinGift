@@ -10,21 +10,18 @@ import org.bukkit.entity.Player
 
 object FirstJoinGiftCommand: CommandExecutor, TabCompleter {
     override fun onCommand(
-        sender: CommandSender,
-        command: Command,
-        label: String,
-        args: Array<out String>
+        sender: CommandSender, command: Command, label: String, args: Array<out String>
     ): Boolean {
-        when(args.getOrNull(0)?.toLowerCase()){
+        when (args.getOrNull(0)?.toLowerCase()) {
             "get" -> {
-                if(sender !is Player) {
+                if (sender !is Player) {
                     sender.sendMessage("コンソールから実行できないコマンドです".toColor)
                     return true
                 }
                 GiftItem.give(sender)
             }
             "edit" -> {
-                if(sender !is Player) {
+                if (sender !is Player) {
                     sender.sendMessage("コンソールから実行できないコマンドです".toColor)
                     return true
                 }
@@ -35,17 +32,14 @@ object FirstJoinGiftCommand: CommandExecutor, TabCompleter {
     }
 
     override fun onTabComplete(
-        sender: CommandSender,
-        command: Command,
-        alias: String,
-        args: Array<out String>
+        sender: CommandSender, command: Command, alias: String, args: Array<out String>
     ): List<String> {
         fun complete(index: Int, vararg completeList: String): List<String> {
             val lower = args[index].toLowerCase()
             return completeList.filter { it.startsWith(lower) }
         }
 
-        return when(args.size){
+        return when (args.size) {
             1 -> complete(0, "get", "edit")
             else -> emptyList()
         }

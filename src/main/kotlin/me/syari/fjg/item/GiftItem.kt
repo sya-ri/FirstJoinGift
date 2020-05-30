@@ -14,12 +14,12 @@ object GiftItem {
     var Player.isEditGiftItem
         get() = uniqueId == editPlayer
         set(value) {
-            if(value){
+            if (value) {
                 editPlayer = uniqueId
             }
         }
 
-    fun openEdit(player: Player){
+    fun openEdit(player: Player) {
         val inventory = plugin.server.createInventory(null, 36, "".toColor).apply {
             contents = giftItemList.toTypedArray()
         }
@@ -27,7 +27,7 @@ object GiftItem {
         player.isEditGiftItem = true
     }
 
-    fun give(player: Player){
+    fun give(player: Player) {
         player.inventory.addItem(*giftItemList.toTypedArray())
     }
 }
