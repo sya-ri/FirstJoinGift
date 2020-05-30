@@ -1,9 +1,12 @@
 package me.syari.fjg.command
 
+import me.syari.fjg.item.GiftItem
+import me.syari.fjg.util.ColoredText.toColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
+import org.bukkit.entity.Player
 
 object FirstJoinGiftCommand: CommandExecutor, TabCompleter {
     override fun onCommand(
@@ -14,10 +17,18 @@ object FirstJoinGiftCommand: CommandExecutor, TabCompleter {
     ): Boolean {
         when(args.getOrNull(0)?.toLowerCase()){
             "get" -> {
-
+                if(sender !is Player) {
+                    sender.sendMessage("コンソールから実行できないコマンドです".toColor)
+                    return true
+                }
+                GiftItem.give(sender)
             }
             "edit" -> {
-
+                if(sender !is Player) {
+                    sender.sendMessage("コンソールから実行できないコマンドです".toColor)
+                    return true
+                }
+                GiftItem.openEdit(sender)
             }
         }
         return true

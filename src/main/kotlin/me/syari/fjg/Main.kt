@@ -1,6 +1,8 @@
 package me.syari.fjg
 
 import me.syari.fjg.command.FirstJoinGiftCommand
+import me.syari.fjg.item.GiftItemEditEvent
+import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
 class Main: JavaPlugin() {
@@ -13,6 +15,13 @@ class Main: JavaPlugin() {
         getCommand("firstjoingift")?.run {
             executor = FirstJoinGiftCommand
             tabCompleter = FirstJoinGiftCommand
+        }
+        registerEvents(GiftItemEditEvent)
+    }
+
+    private fun registerEvents(vararg listener: Listener){
+        listener.forEach {
+            server.pluginManager.registerEvents(it, this)
         }
     }
 }
