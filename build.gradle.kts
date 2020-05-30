@@ -34,16 +34,17 @@ bukkit {
     version = project.version.toString()
     main = "$group.Main"
     author = "sya_ri"
+    apiVersion = "1.13"
     commands {
         register("firstjoingift"){
             description = "FirstJoinGiftに関するコマンドです"
             aliases = listOf("fjg")
-            permission = "fjg.command.run"
+            permission = "fjg.command"
             permissionMessage = "あなたはこのコマンドを実行するのに必要な権限を持っていません"
         }
     }
     permissions {
-        register("fjg.command.run") {
+        register("fjg.command") {
             default = Default.OP
             description = "/fjg を実行するのに必要な権限です"
         }
