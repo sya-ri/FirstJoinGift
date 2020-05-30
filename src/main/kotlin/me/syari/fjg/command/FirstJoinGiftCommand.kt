@@ -1,6 +1,7 @@
 package me.syari.fjg.command
 
 import me.syari.fjg.item.GiftItem
+import me.syari.fjg.message.MessageChanger
 import me.syari.fjg.util.ColoredText.sendWithPrefix
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -32,12 +33,19 @@ object FirstJoinGiftCommand: CommandExecutor, TabCompleter {
                     sender.sendWithPrefix("&c編集中のプレイヤーがいます")
                 }
             }
+            "reload" -> {
+                sender.sendWithPrefix("&fコンフィグを再読み込みします")
+                GiftItem.Config.load()
+                MessageChanger.Config.load()
+                sender.sendWithPrefix("&fコンフィグを再読み込みしました")
+            }
             else -> {
                 sender.sendWithPrefix(
                     """
                     &fコマンド一覧
                     &7- &6/fjg get &7テストでアイテムを取得します
                     &7- &6/fjg edit &7渡すアイテムを設定します
+                    &7- &6/fjg reload &7コンフィグを再読み込みします
                 """.trimIndent()
                 )
             }
@@ -54,7 +62,7 @@ object FirstJoinGiftCommand: CommandExecutor, TabCompleter {
         }
 
         return when (args.size) {
-            1 -> complete(0, "get", "edit")
+            1 -> complete(0, "get", "edit", "reload")
             else -> emptyList()
         }
     }

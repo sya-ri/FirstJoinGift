@@ -7,7 +7,11 @@ object ColoredText {
     val String.toColor: String
         get() = ChatColor.translateAlternateColorCodes('&', this)
 
+    fun CommandSender.sendColoredMessage(message: String) {
+        sendMessage(message.toColor)
+    }
+
     fun CommandSender.sendWithPrefix(message: String) {
-        sendMessage("&6[FirstJoinGift] $message".toColor)
+        sendColoredMessage("&6[FirstJoinGift] $message")
     }
 }
