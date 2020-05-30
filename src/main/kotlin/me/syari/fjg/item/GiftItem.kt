@@ -11,15 +11,10 @@ import java.util.UUID
 object GiftItem {
     internal var giftItemList = listOf<ItemStack>()
 
-    private var editPlayer: UUID? = null
+    internal var editPlayer: UUID? = null
 
-    var Player.isEditGiftItem
+    val Player.isEditGiftItem
         get() = uniqueId == editPlayer
-        set(value) {
-            if (value) {
-                editPlayer = uniqueId
-            }
-        }
 
     val isNullEditPlayer
         get() = editPlayer == null
@@ -29,7 +24,7 @@ object GiftItem {
             contents = giftItemList.toTypedArray()
         }
         player.openInventory(inventory)
-        player.isEditGiftItem = true
+        editPlayer = player.uniqueId
     }
 
     fun give(player: Player) {
