@@ -14,6 +14,7 @@ object GiftItemEditEvent: Listener {
         if (player.isEditGiftItem) {
             val inventory = e.inventory
             giftItemList = inventory.contents.filterNotNull()
+            GiftItem.Config.update()
             player.isEditGiftItem = false
         }
     }
