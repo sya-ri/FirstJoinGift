@@ -20,7 +20,7 @@ object GiftItem {
         get() = editPlayer == null
 
     fun openEdit(player: Player) {
-        val inventory = plugin.server.createInventory(null, 36, "".toColor).apply {
+        val inventory = plugin.server.createInventory(null, 36, "&0&lギフトアイテム編集".toColor).apply {
             contents = giftItemList.toTypedArray()
         }
         player.openInventory(inventory)
